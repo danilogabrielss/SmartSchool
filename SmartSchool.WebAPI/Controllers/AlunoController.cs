@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using SmartSchool.WebAPI.Models;
+using System.Linq;
 
 namespace SmartSchool.WebAPI.Models
 {
@@ -34,6 +35,15 @@ namespace SmartSchool.WebAPI.Models
         public IActionResult Get()
         {
             return Ok(Alunos);
+        }
+        
+        [HttpGet("{Id}")]
+        public IActionResult GetById(int Id)
+        {
+            var Aluno = Alunos.FirstOrDefault(a => a.id == Id);
+            if (Aluno == null) return BadRequest("O aluno não foi encontrado.");
+
+            return Ok(Aluno);
         }
     }
 }
