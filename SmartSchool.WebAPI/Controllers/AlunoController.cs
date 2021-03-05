@@ -11,22 +11,22 @@ namespace SmartSchool.WebAPI.Models
     {
         public List<Aluno>Alunos = new  List<Aluno>(){
             new Aluno () {
-                id = 1,
-                nome = "Joao",
-                sobrenome = "Abreu e Lima",
-                telefone = "151515166"
+                Id = 1,
+                Nome = "Joao",
+                Sobrenome = "Abreu e Lima",
+                Telefone = "151515166"
             },
             new Aluno () {
-                id = 2,
-                nome = "Marta",
-                sobrenome = "Alves",
-                telefone = "145265897"
+                Id = 2,
+                Nome = "Marta",
+                Sobrenome = "Alves",
+                Telefone = "145265897"
             },
             new Aluno () {
-                id = 3,
-                nome = "Carlos",
-                sobrenome = "Nobrega",
-                telefone = "559952854"
+                Id = 3,
+                Nome = "Carlos",
+                Sobrenome = "Nobrega",
+                Telefone = "559952854"
             },
         };
         
@@ -37,10 +37,10 @@ namespace SmartSchool.WebAPI.Models
             return Ok(Alunos);
         }
         
-        [HttpGet("{Id}")]
-        public IActionResult GetById(int Id)
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
-            var Aluno = Alunos.FirstOrDefault(a => a.id == Id);
+            var Aluno = Alunos.FirstOrDefault(a => a.Id == id);
             if (Aluno == null) return BadRequest("O aluno não foi encontrado.");
 
             return Ok(Aluno);
