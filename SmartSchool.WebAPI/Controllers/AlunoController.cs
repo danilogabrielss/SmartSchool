@@ -32,12 +32,12 @@ namespace SmartSchool.WebAPI.Models
         
         public AlunoController(){}
         [HttpGet]
-        public IActionResult Get(Aluno aluno)
+        public IActionResult Get()
         {
-            return Ok(aluno);
+            return Ok(Alunos);
         }
         
-        [HttpGet("byId")]
+        [HttpGet("byId/{id}")]
         public IActionResult GetById(int id)
         {
             var aluno = Alunos.FirstOrDefault(a => a.Id == id);
@@ -74,9 +74,9 @@ namespace SmartSchool.WebAPI.Models
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id, Aluno aluno)
+        public IActionResult Delete(int id)
         {
-            return Ok(aluno);
+            return Ok();
         }
     }
 }
