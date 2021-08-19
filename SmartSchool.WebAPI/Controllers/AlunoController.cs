@@ -11,22 +11,22 @@ namespace SmartSchool.WebAPI.Models
     {
         public List<Aluno>Alunos = new  List<Aluno>(){
             new Aluno () {
-                id = 1,
-                nome = "Joao",
-                sobrenome = "Abreu e Lima",
-                telefone = "151515166"
+                Id = 1,
+                Nome = "Joao",
+                Sobrenome = "Abreu",
+                Telefone = "151515166"
             },
             new Aluno () {
-                id = 2,
-                nome = "Marta",
-                sobrenome = "Alves",
-                telefone = "145265897"
+                Id = 2,
+                Nome = "Marta",
+                Sobrenome = "Alves",
+                Telefone = "145265897"
             },
             new Aluno () {
-                id = 3,
-                nome = "Carlos",
-                sobrenome = "Nobrega",
-                telefone = "559952854"
+                Id = 3,
+                Nome = "Carlos",
+                Sobrenome = "Nobrega",
+                Telefone = "559952854"
             },
         };
         
@@ -36,14 +36,48 @@ namespace SmartSchool.WebAPI.Models
         {
             return Ok(Alunos);
         }
-        
-        [HttpGet("{Id}")]
-        public IActionResult GetById(int Id)
-        {
-            var Aluno = Alunos.FirstOrDefault(a => a.id == Id);
-            if (Aluno == null) return BadRequest("O aluno não foi encontrado.");
 
-            return Ok(Aluno);
+        //http://localhost:5000/api/Aluno/byId/1
+        [HttpGet("byId/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var aluno = Alunos.FirstOrDefault(a => a.Id == id);
+            if (aluno == null) return BadRequest("O aluno não foi encontrado.");
+
+            return Ok(aluno);
+        }
+
+        [HttpGet("byName")]
+        public IActionResult GetByName(string nome, string Sobrenome)
+        {
+            var aluno = Alunos.FirstOrDefault(a => a.Nome.Contains(nome) && a.Sobrenome.Contains(Sobrenome));
+            if (aluno == null) return BadRequest("O aluno não foi encontrado.");
+
+            return Ok(aluno);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch (int id, Aluno aluno)
+        {
+            return Ok(aluno);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Ok();
         }
     }
 }

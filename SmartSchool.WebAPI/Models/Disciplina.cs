@@ -7,13 +7,13 @@ namespace SmartSchool.WebAPI.Models
         public Disciplina() { }
         public Disciplina(int id, string nome, int professorId)
         {
-            this.id = id;
-            this.nome = nome;
-            this.professorId = professorId;            
+            this.Id = id;
+            this.Nome = nome;
+            this.ProfessorId = professorId;            
         }
-        public int id { get; set; }
-        public string nome { get; set; }
-        public int professorId { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public int ProfessorId { get; set; }
         public Professor Professor { get; set; }
         public IEnumerable<AlunoDisciplina> AlunosDisciplinas { get; set; }
     }
