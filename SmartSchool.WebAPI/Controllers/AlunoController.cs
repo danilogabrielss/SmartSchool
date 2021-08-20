@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SmartSchool.WebAPI.Models;
 using SmartSchool.WebAPI.Data;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmartSchool.WebAPI.Models
 {
@@ -11,7 +12,8 @@ namespace SmartSchool.WebAPI.Models
     public class AlunoController : ControllerBase
     {
         public readonly SmartContext _context;
-        public AlunoController(SmartContext context){
+        public AlunoController(SmartContext context)
+        {
             _context = context;
         }
         [HttpGet]
@@ -26,7 +28,7 @@ namespace SmartSchool.WebAPI.Models
         {
             var aluno = _context.Alunos.FirstOrDefault(a => a.Id == id);
             if (aluno == null) return BadRequest("O aluno não foi encontrado.");
-            
+
             return Ok(aluno);
         }
 
@@ -50,7 +52,7 @@ namespace SmartSchool.WebAPI.Models
         [HttpPut("{id}")]
         public IActionResult Put(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("O aluno não foi encontrado.");
 
             _context.Update(aluno);
@@ -59,9 +61,9 @@ namespace SmartSchool.WebAPI.Models
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Patch (int id, Aluno aluno)
+        public IActionResult Patch(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("O aluno não foi encontrado.");
             _context.Update(aluno);
             _context.SaveChanges();
@@ -71,7 +73,7 @@ namespace SmartSchool.WebAPI.Models
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("O aluno não foi encontrado.");
             _context.Remove(alu);
             _context.SaveChanges();
